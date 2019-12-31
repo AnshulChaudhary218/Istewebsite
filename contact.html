@@ -96,73 +96,65 @@
   <section class="contact-form">
       <div class="container">
           <div class="row">
-              <form id="contact-form" name="myForm" onsubmit="submitClick()" autocomplete="off">
-                  <div class="col-md-6 col-sm-12">
-                      <div class="block">
-                          
-                          <div class="form-group">
-                              <input name="user_name" type="text" class="form-control" placeholder="Your Name">
-                          </div>
-                          <div class="form-group">
-                              <input name="user_email" type="text" class="form-control" placeholder="Email Address">
-                          </div>
-                          <div class="form-group">
-                              <input name="user_subject" type="text" class="form-control" placeholder="Subject">
-                          </div>
+            <form id="membership-form" target="_self" onsubmit="return postToGoogle2();" autocomplete="off" action="">
+              <div class="col-md-6 col-sm-12">
+                  <div class="block">        
+                      <div class="form-group">
+                          <label for="user_name" style="font-size: 20px; color: #47424C;">Full Name :</label>
+                          <input id="user_name" name="user_name" type="text" class="form-control" placeholder="Enter Full Name" required="true">
                       </div>
+                      <div class="form-group">
+                          <label for="user_class" style="font-size: 20px; color: #47424C;">Class :</label>
+                          <input id="user_class" name="user_class" type="text" class="form-control" placeholder="Your Class" required="true">
+                      </div>
+                      <div class="form-group">
+                          <label for="user_email" style="font-size: 20px; color: #47424C;">Email Address :</label>
+                          <input id="user_email" name="user_email" type="email" class="form-control" placeholder="Email Address" autocomplete="off" required="true">
+                      </div>
+                      
+                  </div>
                   </div>
                   <div class="col-md-6 col-sm-12">
-                      <div class="block">
-                          <div class="form-group-2">
-                              <textarea name="user_message" class="form-control" rows="3" placeholder="Your Message"></textarea>
-                          </div>
-                              <br><button class="btn btn-default" type="submit">Send Message</button>
+                    <div class="block">
+                      <div class="form-group">
+                          <label for="user_subject" style="font-size: 20px; color: #47424C;">Subject :</label>
+                          <input id="user_subject" name="user_subject" type="text" class="form-control" placeholder="Subject" required="true">
                       </div>
+                      <div class="form-group">
+                          <label for="user_message" style="font-size: 20px; color: #47424C;">Message :</label>
+                          <textarea id="user_message" name="user_message" type="text" class="form-control" rows="3" placeholder="Your Message" required="true"></textarea>
+                      </div>
+                          <br><button class="btn btn-default" type="submit">Send Message</button>
+                    </div>
                   </div>
-                  <!--<div class="error" id="error">Sorry Msg dose not sent</div>
-                  <div class="success" id="success">Message Sent</div>-->
-              </form>
+          </form>
+              <script>
+                function postToGoogle2() {
+                                var user_name = $("#user_name").val();
+                                var user_email = $("#user_email").val();
+                                var user_class = $("#user_class").val();
+                                var user_subject = $("#user_subject").val();
+                                var user_message = $("#user_message").text();
 
-
-
-              <script type="text/javascript">
-                function submitClick() {
-                  if (formValidation()) {
-                    alert("Thank you for your time! Your details have been submitted! You will now be redirected to home page.");
-                    /*return true;*/
-                    window.location.href='index.html';
-                  } else {
-                    return false;
-                  }
-                }
-
-                function formValidation() {
-                  flag = true;
-
-                  if (document.myForm.user_name.value == "") {
-                    flag = false;
-                  }
-                  if (document.myForm.user_message.value == "") {
-                    flag = false;
-                  }
-
-                  // Validate letters only as Name
-                  if (!/^[a-zA-Z]*$/g.test(document.myForm.user_name.value)) {
-                    flag = false;
-                  }
-
-                  // Validate emails
-                  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)* (\.\w{2,3})+$/.test(myForm.user_email.value)) //Regular expressions to validate email
-                  {
-                    //alert("Enter Valid Email Address!");
-                    //flag = false;
-                  }
-
-                  return flag;
-                }
-
-
-              </script>
+                                $.ajax({
+                                    url: "https://docs.google.com/forms/d/e/1FAIpQLScM78iK8KvtFwMeZUtPga32NfgAeaR_xywM6VfO8OoVY9DwYg/formResponse?",
+                          data: {"entry.1201479467": user_name, "entry.1080399900": user_email, "entry.780147543": user_class, "entry.853055184": user_subject, "entry.959215636": user_message},
+                                    type: "POST",
+                                    dataType: "xml",
+                                    success: function(d)
+                          {
+                          },
+                          error: function(x, y, z)
+                            {
+                
+                              alert('Thank you for your time! Your details have been submitted! You will now be redirected to home page.');
+                              window.location.href='index.html';
+                              
+                            }
+                                });
+                        return false;
+                            }
+                </script>
 
 
           </div>

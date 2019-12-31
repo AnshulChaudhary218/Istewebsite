@@ -109,7 +109,7 @@
                 <button id="send" type="submit" class="common_btn">Register Now</button>
               </form> -->
               
-              <form id="membership-form" target="_self" onsubmit="return postToGoogle();" autocomplete="off" action="">
+              <form id="membership-form" target="_self" onsubmit="return postToGoogle1();" autocomplete="off" action="">
                   <div class="col-md-6 col-sm-12">
                       <div class="block">        
                           <div class="form-group">
@@ -138,7 +138,7 @@
                           </div>
                           <br>
                           <div class="block">
-                            <button class="btn btn-default" type="submit" formaction="submit.php" >Become a member</button>
+                            <button class="btn btn-default" type="submit">Become a member</button>
                         </div>
                         </div>
                       </div>
@@ -176,7 +176,7 @@
                   <div class="success" id="success">Message Sent</div>
               </form>
               <script>
-                function postToGoogle() {
+                function postToGoogle1() {
                                 var user_name = $("#user_name").val();
                                 var user_class = $("#user_class").val();
                                 var user_email = $("#user_email").val();
@@ -194,8 +194,8 @@
                           error: function(x, y, z)
                             {
                 
-                              alert('Your response has been recorded!');
-                              document.getElementById("membership-form").reset();
+                              alert('Thank you for your time! Your details have been submitted! You will now be redirected to home page.');
+                              window.location.href='index.html';
                               
                             }
                                 });
